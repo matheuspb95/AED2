@@ -20,7 +20,7 @@ public:
     Grafo(int V, bool digrafo);
 
     void adicionarAresta(int v1, int v2);  
-    bool removerAresta(int v1, int v2);    
+    void removerAresta(int v1, int v2);    
     void adicionarVertice();
     void removerVertice(int v);
     int obterGrauDeSaida(int v);

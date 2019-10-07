@@ -20,7 +20,7 @@ void Grafo::adicionarAresta(int v1, int v2)
 }
 
 //Remover aresta
-bool Grafo::removerAresta(int v1, int v2)
+void Grafo::removerAresta(int v1, int v2)
 {
     vector <int> :: iterator vertAdj;
     int c = 0;   
@@ -191,6 +191,13 @@ void Grafo::dijkstra(int origem)
 
 	cout << "Dijkstra" << endl;
 	this->printSolution(distancia, predecessor);
+}
+
+void Grafo::printSolution(int distancia[], int predecessor[]){
+	cout << "Vertice   Distancia da origem	Predecessor\n" << endl; 
+    for (int i = 0; i < V; ++i)
+        cout << i << " \t\t " << distancia[i] << " \t\t " << predecessor[i] << endl; 
+	cout << endl;
 }
 
 int Grafo::distanciaMin(int distancia[], bool visitado[]){
