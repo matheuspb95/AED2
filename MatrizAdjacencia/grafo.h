@@ -46,4 +46,6 @@ public:
 	void buscaLargura(int v);
 	void dijkstra(int origem);
 	void bellmanFord(int origem);
+
+	void prim(int origem);
 };

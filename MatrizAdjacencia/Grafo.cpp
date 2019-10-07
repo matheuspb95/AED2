@@ -3,7 +3,7 @@
 Grafo::Grafo(int V, bool digrafo){
 	this->V = V;
 	this->digrafo = digrafo;
-	
+
 	adj.resize(V);
 	vertices.resize(V);
 
@@ -251,8 +251,9 @@ void Grafo::auxResizeVertice(){
 
 void Grafo::printSolution(int distancia[], int predecessor[]){
 	cout << "Vertice   Distancia da origem	Predecessor\n" << endl; 
-    for (int i = 0; i < V; ++i)
+    for (int i = 0; i < V; ++i){
         cout << i << " \t\t " << distancia[i] << " \t\t " << predecessor[i] << endl; 
+	}
 	cout << endl;
 }
 
@@ -281,4 +282,73 @@ void Grafo::dfsUtil(int v, bool visitados[]){
 			}
 		}
 	}
+}
+
+
+
+void Grafo::prim(int origem){
+    vector<Aresta> franja;
+	vector<int> mst;
+	mst.push_back(origem);
+	int orig = origem;
+	int custo = 0;
+	cout << "Prim";
+	while(mst.size() < adj.size()){
+		int peso = INF;
+		int selected = orig;
+		for(uint i = 0; i < arestas.size(); i++){
+			if(arestas[i].origem == orig){
+				franja.push_back(arestas[i]);
+				if(arestas[i].peso < peso){
+					peso = arestas[i].peso;
+					selected = i;
+				}
+			}
+		}
+		for(uint i = 0; i < franja.size(); i++){
+			cout << "Franja: ";
+			cout << franja[i].origem << "-" << franja[i].destino << "/";
+		}
+		for(uint i = 0; i < franja.size();){
+			if(franja[i].destino == selected){
+				franja.erase(franja.begin() + i);
+			}else{
+				i++;
+			}
+		}
+		custo += franja[selected].peso;
+		mst.push_back(selected);
+		franja.erase(franja.begin() + selected);
+		orig = selected; 
+	}
+	cout  << "mst gerada pelo prim:"<<endl;
+	for(uint i = 0; i < mst.size(); i++){
+		cout << mst[i] << "-";
+	}
+	cout << "custo: " << custo;
+}
+
+int main() {
+    Grafo grafo(8, false);
+	
+    grafo.adicionarAresta(5, 4, 35);
+    grafo.adicionarAresta(7, 4, 37);
+    grafo.adicionarAresta(7, 5, 28);
+    grafo.adicionarAresta(0, 7, 16);
+    grafo.adicionarAresta(1, 5, 32);
+    grafo.adicionarAresta(0, 4, 38);
+    grafo.adicionarAresta(2, 3, 17);
+    grafo.adicionarAresta(7, 1, 19);
+    grafo.adicionarAresta(0, 2, 26);
+    grafo.adicionarAresta(1, 2, 36);
+    grafo.adicionarAresta(1, 3, 29);
+    grafo.adicionarAresta(7, 2, 34);
+    grafo.adicionarAresta(2, 6, 40);
+    grafo.adicionarAresta(3, 6, 52);
+    grafo.adicionarAresta(0, 6, 58);	
+    grafo.adicionarAresta(6, 4, 93);
+
+    grafo.prim(0);
+
+    return 0;
 }

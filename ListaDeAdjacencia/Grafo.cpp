@@ -214,8 +214,6 @@ int Grafo::distanciaMin(int distancia[], bool visitado[]){
 	return minIndex;
 }
 
-
-
 //imprime Lista
 void Grafo::imprimirLista()
 {
